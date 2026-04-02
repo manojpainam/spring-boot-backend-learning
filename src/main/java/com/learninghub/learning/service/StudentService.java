@@ -1,8 +1,11 @@
 package com.learninghub.learning.service;
 
-import org.springframework.stereotype.Service;
+import com.learninghub.learning.model.Student;
 
-@Service
 public interface StudentService {
-    public String greetStudent(String name);    
+    public String greetStudent(String name);
+    
+    public Student getStudent();
+
+    public Student createStudent(Student student);
 }
