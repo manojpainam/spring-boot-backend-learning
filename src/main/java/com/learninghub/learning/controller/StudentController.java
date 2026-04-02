@@ -1,5 +1,7 @@
 package com.learninghub.learning.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +33,11 @@ public class StudentController {
     @PostMapping("/create")
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
+    }
+
+    @GetMapping("/list")
+    public List<Student> getStudentList() {
+        return studentService.getStudentList();
     }
     
 }
