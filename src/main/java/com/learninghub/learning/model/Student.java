@@ -3,12 +3,22 @@ package com.learninghub.learning.model;
 public class Student {
     private String name;
     private int age;
+    private int id;
 
     public Student(){}
 
-    public Student(String name, int age) {
+    public Student(int id, String name, int age) {
+        this.id = id;
         this.name = name;
         this.age = age;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -28,6 +38,6 @@ public class Student {
     }
 
     public String toString() {
-        return "name : " + this.name + " age : " + age;
+        return "id : " + id + " name : " + this.name + " age : " + age;
     }
 }

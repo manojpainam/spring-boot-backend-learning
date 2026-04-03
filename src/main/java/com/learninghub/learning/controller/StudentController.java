@@ -24,10 +24,10 @@ public class StudentController {
     public String greetStudent(@RequestParam(defaultValue = "Student") String name) {
         return studentService.greetStudent(name);
     }
-
+    
     @GetMapping
-    public Student getStudent() {
-        return studentService.getStudent();
+    public List<Student> getStudents() {
+        return studentService.getStudentList();
     }
 
     @PostMapping("/create")
