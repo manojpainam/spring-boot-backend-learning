@@ -10,4 +10,6 @@ public interface StudentService {
     public Student createStudent(Student student);
 
     public List<Student> getStudentList();
+
+    public Student getStudent(int id);
 }

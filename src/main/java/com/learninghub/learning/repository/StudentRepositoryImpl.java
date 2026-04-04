@@ -21,4 +21,13 @@ public class StudentRepositoryImpl implements StudentRepository {
     public List<Student> findAll() {
         return students;
     }
+
+    public Student findStudentById(int id) {
+        for (Student student : students) {
+            if(student.getId() == id) {
+                return student;
+            }
+        }
+        return null;
+    }
 }

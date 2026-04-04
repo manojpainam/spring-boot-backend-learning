@@ -8,4 +8,6 @@ public interface StudentRepository {
     public void save(Student student);
 
     public List<Student> findAll();
+
+    public Student findStudentById(int id);
 }
