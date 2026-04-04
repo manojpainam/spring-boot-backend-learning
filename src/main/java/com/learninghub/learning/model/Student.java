@@ -3,11 +3,11 @@ package com.learninghub.learning.model;
 public class Student {
     private String name;
     private int age;
-    private int id;
+    private Integer id;
 
     public Student(){}
 
-    public Student(int id, String name, int age) {
+    public Student(Integer id, String name, int age) {
         this.id = id;
         this.name = name;
         this.age = age;
@@ -17,7 +17,7 @@ public class Student {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
