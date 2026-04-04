@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.learninghub.learning.exception.StudentExceptions;
 import com.learninghub.learning.model.Student;
 
 @Repository
@@ -24,10 +25,10 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     public Student findStudentById(int id) {
         for (Student student : students) {
-            if(student.getId() == id) {
+            if (student.getId().equals(id)) {
                 return student;
             }
         }
-        return null;
+        throw new StudentExceptions("Student not found with id " + id);
     }
 }
