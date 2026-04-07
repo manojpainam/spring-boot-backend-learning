@@ -31,4 +31,14 @@ public class StudentRepositoryImpl implements StudentRepository {
         }
         throw new StudentExceptions("Student not found with id " + id);
     }
+
+    public String deleteStudentById(int id) {
+        for (int i = 0; i < students.size(); i++) {
+            if(students.get(i).getId().equals(id)) {
+                students.remove(i);
+                return "Student deleted successfully";
+            }
+        }
+        throw new StudentExceptions("Student not found with id " + id);
+    }
 }

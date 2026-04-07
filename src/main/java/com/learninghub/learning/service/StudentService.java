@@ -14,4 +14,6 @@ public interface StudentService {
     public Student getStudent(int id);
 
     public Student updateStudent(int id, Student student);
+
+    public String deleteStudent(int id);
 }

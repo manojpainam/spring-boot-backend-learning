@@ -10,4 +10,6 @@ public interface StudentRepository {
     public List<Student> findAll();
 
     public Student findStudentById(int id);
+
+    public String deleteStudentById(int id);
 }

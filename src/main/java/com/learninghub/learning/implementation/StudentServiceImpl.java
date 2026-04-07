@@ -44,4 +44,8 @@ public class StudentServiceImpl implements StudentService {
         
         return existingStudent;
     }
+
+    public String deleteStudent(int id) {
+        return studentRepository.deleteStudentById(id);
+    }
 }
