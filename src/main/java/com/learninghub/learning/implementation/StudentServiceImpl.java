@@ -35,4 +35,13 @@ public class StudentServiceImpl implements StudentService {
     public Student getStudent(int id) {
         return studentRepository.findStudentById(id);
     }
+
+    public Student updateStudent(int id, Student student) {
+        Student existingStudent = getStudent(id);
+
+        existingStudent.setName(student.getName());
+        existingStudent.setAge(student.getAge());
+        
+        return existingStudent;
+    }
 }
