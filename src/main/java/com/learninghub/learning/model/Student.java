@@ -1,14 +1,28 @@
 package com.learninghub.learning.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "students")
 public class Student {
-    private String name;
-    private int age;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
+    @Column(nullable = false)
+    private String name;
+    
+    private int age;
 
     public Student(){}
 
-    public Student(Integer id, String name, int age) {
-        this.id = id;
+    public Student(String name, int age) {
         this.name = name;
         this.age = age;
     }

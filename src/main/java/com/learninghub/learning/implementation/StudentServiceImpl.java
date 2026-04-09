@@ -23,8 +23,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student createStudent(Student student) {
-        studentRepository.save(student);
-        return student;
+        return studentRepository.save(student);
     }
 
     @Override
@@ -32,20 +31,26 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findAll();
     }
 
+    @Override
     public Student getStudent(int id) {
-        return studentRepository.findStudentById(id);
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
     }
 
+    @Override
     public Student updateStudent(int id, Student student) {
         Student existingStudent = getStudent(id);
 
         existingStudent.setName(student.getName());
         existingStudent.setAge(student.getAge());
-        
-        return existingStudent;
+
+        return studentRepository.save(existingStudent);
     }
 
+    @Override
     public String deleteStudent(int id) {
-        return studentRepository.deleteStudentById(id);
+        Student existingStudent = getStudent(id);
+        studentRepository.delete(existingStudent);
+        return "Student deleted successfully";
     }
 }

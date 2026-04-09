@@ -1,15 +1,8 @@
 package com.learninghub.learning.repository;
 
-import java.util.List;
-
+import org.springframework.data.jpa.repository.JpaRepository;
 import com.learninghub.learning.model.Student;
 
-public interface StudentRepository {
-    public void save(Student student);
-
-    public List<Student> findAll();
-
-    public Student findStudentById(int id);
-
-    public String deleteStudentById(int id);
+public interface StudentRepository extends JpaRepository<Student, Integer> {
+    
 }
