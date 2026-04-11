@@ -2,6 +2,7 @@ package com.learninghub.learning.implementation;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.learninghub.learning.exception.StudentExceptions;
@@ -12,11 +13,8 @@ import com.learninghub.learning.service.StudentService;
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private final StudentRepository studentRepository;
-
-    public StudentServiceImpl(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
-    }
+    @Autowired
+    private StudentRepository studentRepository;
 
     public String greetStudent(String name) {
         return "Welcome " + name;

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learninghub.learning.common.ApiResponse;
 import com.learninghub.learning.model.Student;
 import com.learninghub.learning.service.StudentService;
 
@@ -22,35 +22,30 @@ import com.learninghub.learning.service.StudentService;
 public class StudentController {
     
     @Autowired StudentService studentService;
-
-    @GetMapping("/greet")
-    public String greetStudent(@RequestParam(defaultValue = "Student") String name) {
-        return studentService.greetStudent(name);
-    }
     
     @GetMapping
-    public List<Student> getStudents() {
-        return studentService.getStudentList();
+    public ApiResponse<List<Student>> getStudents() {
+        return new ApiResponse<>(false, "students fetched successfully", studentService.getStudentList());
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {
-        return studentService.createStudent(student);
+    public ApiResponse<Student> createStudent(@RequestBody Student student) {
+        return new ApiResponse<Student>(false, "created sudent successfully", studentService.createStudent(student));
     }
 
     @GetMapping("/{id}")
-    public Student getStudent(@PathVariable int id) {
-        return studentService.getStudent(id);
+    public ApiResponse<Student> getStudent(@PathVariable int id) {
+        return new ApiResponse<Student>(false, "student fetched successfully", studentService.getStudent(id));
     }
 
     @PutMapping("{id}")
-    public Student updateStudent(@PathVariable int id, @RequestBody Student student) {
-        return studentService.updateStudent(id, student);
+    public ApiResponse<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
+        return new ApiResponse<Student>(false, "student updated successfully", studentService.updateStudent(id, student));
     }
 
     @DeleteMapping("/{id}")
-    public String deleteStudent(@PathVariable int id) {
-        return studentService.deleteStudent(id);
+    public ApiResponse<Student> deleteStudent(@PathVariable int id) {
+        return new ApiResponse<Student>(false, studentService.deleteStudent(id), null) ;
     }
     
 }
