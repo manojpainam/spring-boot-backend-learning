@@ -33,14 +33,9 @@ public class StudentController {
         return studentService.getStudentList();
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
-    }
-
-    @GetMapping("/list")
-    public List<Student> getStudentList() {
-        return studentService.getStudentList();
     }
 
     @GetMapping("/{id}")
@@ -48,7 +43,7 @@ public class StudentController {
         return studentService.getStudent(id);
     }
 
-    @PutMapping("update/{id}")
+    @PutMapping("{id}")
     public Student updateStudent(@PathVariable int id, @RequestBody Student student) {
         return studentService.updateStudent(id, student);
     }
