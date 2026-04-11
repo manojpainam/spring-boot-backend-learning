@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.learninghub.learning.exception.StudentExceptions;
 import com.learninghub.learning.model.Student;
 import com.learninghub.learning.repository.StudentRepository;
 import com.learninghub.learning.service.StudentService;
@@ -34,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(int id) {
         return studentRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+                .orElseThrow(() -> new StudentExceptions("Student not found with id: " + id));
     }
 
     @Override
@@ -49,8 +50,10 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public String deleteStudent(int id) {
-        Student existingStudent = getStudent(id);
-        studentRepository.delete(existingStudent);
-        return "Student deleted successfully";
+        if (!studentRepository.existsById(id)) {
+            throw new StudentExceptions("Student not found with id: " + id);
+        }
+        studentRepository.deleteById(id);
+        return "student deleted";
     }
 }
