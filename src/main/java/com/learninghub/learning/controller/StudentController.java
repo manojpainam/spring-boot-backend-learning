@@ -16,6 +16,8 @@ import com.learninghub.learning.common.ApiResponse;
 import com.learninghub.learning.model.Student;
 import com.learninghub.learning.service.StudentService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("api/students")
@@ -29,7 +31,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ApiResponse<Student> createStudent(@RequestBody Student student) {
+    public ApiResponse<Student> createStudent(@Valid @RequestBody Student student) {
         return new ApiResponse<Student>(false, "created sudent successfully", studentService.createStudent(student));
     }
 
@@ -39,7 +41,7 @@ public class StudentController {
     }
 
     @PutMapping("{id}")
-    public ApiResponse<Student> updateStudent(@PathVariable int id, @RequestBody Student student) {
+    public ApiResponse<Student> updateStudent(@PathVariable int id, @Valid @RequestBody Student student) {
         return new ApiResponse<Student>(false, "student updated successfully", studentService.updateStudent(id, student));
     }
 
