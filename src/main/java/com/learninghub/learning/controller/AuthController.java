@@ -29,4 +29,11 @@ public class AuthController {
                 savedUser
         );
     }
+
+    @PostMapping("/login")
+    public ApiResponse<User> login(String email, String password) {
+        userService.login(email, password);
+
+        return new ApiResponse<User>(false, "Login Successful", null);
+    }
 }

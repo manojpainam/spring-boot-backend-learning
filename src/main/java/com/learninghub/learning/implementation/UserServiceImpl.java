@@ -29,4 +29,16 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(user);
     }
+
+    @Override
+    public User login(String email, String password) {
+        User  existingUser = userRepository.findByEmail(email)
+                .orElseThrow(() -> new StudentExceptions("Requested user doesn't exists"));
+
+        if(!encoder.matches(password, existingUser.getPassword())) {
+            throw new StudentExceptions("Password is Incorrect!");
+        }
+
+        return existingUser;
+    }
 }
