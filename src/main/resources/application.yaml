@@ -1,3 +1,6 @@
 spring:
   profiles:
     active: db
+
+jwt:
+  secret: ${JWT_SECRET}

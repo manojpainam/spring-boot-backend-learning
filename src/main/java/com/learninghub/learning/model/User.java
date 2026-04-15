@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,11 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotBlank(message = "Username cannot be empty")
+    @Column(unique = true, nullable = false)
+    @Size(max=50)
+    private String username;
 
     @Email(message = "Invalid email format")
     @NotBlank(message = "Email cannot be empty")
@@ -31,7 +37,8 @@ public class User {
 
     public User() {}
 
-    public User(String email, String password) {
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -42,6 +49,14 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

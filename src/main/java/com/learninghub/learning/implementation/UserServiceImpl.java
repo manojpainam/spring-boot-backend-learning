@@ -31,8 +31,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User login(String email, String password) {
-        User  existingUser = userRepository.findByEmail(email)
+    public User login(String username, String password) {
+        User  existingUser = userRepository.findByUsername(username)
                 .orElseThrow(() -> new StudentExceptions("Requested user doesn't exists"));
 
         if(!encoder.matches(password, existingUser.getPassword())) {
