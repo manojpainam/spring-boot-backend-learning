@@ -1,7 +1,9 @@
 package com.learninghub.learning.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.learninghub.learning.common.ApiResponse;
 import com.learninghub.learning.dto.AuthResponse;
@@ -16,14 +18,12 @@ import jakarta.validation.Valid;
 public class AuthController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }
-
-    @Autowired
-    private JwtUtil jwtUtil;
 
     @PostMapping("/signup")
     public ApiResponse<User> register(@Valid @RequestBody User user) {
