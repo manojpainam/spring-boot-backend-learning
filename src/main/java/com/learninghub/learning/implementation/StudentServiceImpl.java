@@ -1,8 +1,10 @@
 package com.learninghub.learning.implementation;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.learninghub.learning.exception.StudentExceptions;
@@ -26,8 +28,10 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Student> getStudentList() {
-        return studentRepository.findAll();
+    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending) {
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        return studentRepository.findAll(pageable);
     }
 
     @Override

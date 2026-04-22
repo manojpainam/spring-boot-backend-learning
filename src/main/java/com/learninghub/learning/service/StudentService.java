@@ -1,6 +1,6 @@
 package com.learninghub.learning.service;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 import com.learninghub.learning.model.Student;
 
@@ -8,7 +8,7 @@ public interface StudentService {
 
     public Student createStudent(Student student);
 
-    public List<Student> getStudentList();
+    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending);
 
     public Student getStudent(int id);
 
