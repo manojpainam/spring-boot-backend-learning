@@ -37,4 +37,34 @@ public class NoteServiceImpl implements NoteService {
 
         return notesRepo.save(note);
     }
+
+    public Note updateNote(Integer id, Note note) {
+
+        User user = getCurrentUser();
+
+        Note existingNote = notesRepo.findByIdAndUserId(id, user.getId())
+                .orElseThrow(() -> new StudentExceptions("Note not found or not owned by user"));
+
+        existingNote.setTitle(note.getTitle());
+        existingNote.setContent(note.getContent());
+
+        return existingNote;
+    }
+
+    public void deleteNotes(Integer id) {
+
+        User user = getCurrentUser();
+
+        Note existingNote = notesRepo.findByIdAndUserId(id, user.getId())
+                .orElseThrow(() -> new StudentExceptions("Note not found or not owned by user"));
+
+        notesRepo.delete(existingNote);
+    }
+
+    private User getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        return userRepo.findByUsername(auth.getName())
+                .orElseThrow(() -> new StudentExceptions("User not found"));
+    }
 }

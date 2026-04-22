@@ -3,8 +3,11 @@ package com.learninghub.learning.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,5 +34,17 @@ public class NotesController {
     public ApiResponse<Note> createNotes(@RequestBody Note note) {
         Note savedNote = noteService.createNote(note);
         return new ApiResponse<>(false, "Created a new note", savedNote);
+    }
+
+    @PutMapping("/{id}")
+    public ApiResponse<Note> updateNotes(@PathVariable Integer id, @RequestBody Note note) {
+        Note updatedNote = noteService.updateNote(id, note);
+        return new ApiResponse<Note>(false, "Updated Notes successfully", updatedNote);
+    }
+
+    @DeleteMapping("/{id}")
+    public ApiResponse<Note> deleteNotes(@PathVariable Integer id) {
+        noteService.deleteNotes(id);
+        return new ApiResponse<Note>(false, "Notes deleted successfully", null);
     }
 }

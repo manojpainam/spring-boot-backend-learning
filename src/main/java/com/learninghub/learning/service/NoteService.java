@@ -8,4 +8,8 @@ public interface NoteService {
     List<Note> getNotes(Integer userId);
 
     Note createNote(Note note);
+
+    Note updateNote(Integer id, Note note);
+
+    void deleteNotes(Integer id);
 }
