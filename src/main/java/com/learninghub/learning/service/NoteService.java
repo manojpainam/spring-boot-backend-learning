@@ -2,6 +2,8 @@ package com.learninghub.learning.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.learninghub.learning.model.Note;
 
 public interface NoteService {
@@ -12,4 +14,6 @@ public interface NoteService {
     Note updateNote(Integer id, Note note);
 
     void deleteNotes(Integer id);
+
+    Page<Note> getAllNotes(int page, int size, String sortBy, boolean ascending, String search);
 }

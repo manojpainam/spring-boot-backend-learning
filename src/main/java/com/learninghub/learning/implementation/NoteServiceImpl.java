@@ -3,6 +3,10 @@ package com.learninghub.learning.implementation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -66,5 +70,17 @@ public class NoteServiceImpl implements NoteService {
 
         return userRepo.findByUsername(auth.getName())
                 .orElseThrow(() -> new StudentExceptions("User not found"));
+    }
+
+    public Page<Note> getAllNotes(int page, int size, String sortBy, boolean ascending, String search) {
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        if(search == null || search.trim().isEmpty()) {
+            return notesRepo.findAll(pageable);
+        }
+
+        return notesRepo.searchNotes(search, pageable);
+
     }
 }

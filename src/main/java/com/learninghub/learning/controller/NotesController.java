@@ -3,6 +3,7 @@ package com.learninghub.learning.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,7 @@ public class NotesController {
     @Autowired
     private NoteService noteService;
     
-    @GetMapping
+    @GetMapping("/user")
     public ApiResponse<List<Note>> getNotes(@RequestParam Integer userId) {
         List<Note> notes = noteService.getNotes(userId);
         return new ApiResponse<List<Note>>(false, "Notes fetched successfully", notes);
@@ -46,5 +47,16 @@ public class NotesController {
     public ApiResponse<Note> deleteNotes(@PathVariable Integer id) {
         noteService.deleteNotes(id);
         return new ApiResponse<Note>(false, "Notes deleted successfully", null);
+    }
+
+    @GetMapping
+    public ApiResponse<Page<Note>> getAllNotes(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "5") int size,
+        @RequestParam(defaultValue = "id") String sortBy,
+        @RequestParam(defaultValue = "true") boolean ascending,
+        @RequestParam(defaultValue = "") String search
+    ) {
+        return new ApiResponse<Page<Note>>(false, "Notes deleted successfully", noteService.getAllNotes(page, size, sortBy, ascending, search));
     }
 }
