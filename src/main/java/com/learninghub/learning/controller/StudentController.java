@@ -1,7 +1,5 @@
 package com.learninghub.learning.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +29,9 @@ public class StudentController {
     public ApiResponse<Page<Student>> getStudents(@RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "5") int size,
         @RequestParam(defaultValue = "id") String sortBy,
-        @RequestParam(defaultValue = "true") boolean ascending) {
-        return new ApiResponse<>(false, "students fetched successfully", studentService.getStudentList(page, size, sortBy, ascending));
+        @RequestParam(defaultValue = "true") boolean ascending,
+        @RequestParam(defaultValue = "") String search) {
+        return new ApiResponse<>(false, "students fetched successfully", studentService.getStudentList(page, size, sortBy, ascending, search));
     }
 
     @PostMapping

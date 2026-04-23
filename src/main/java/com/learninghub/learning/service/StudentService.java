@@ -8,7 +8,7 @@ public interface StudentService {
 
     public Student createStudent(Student student);
 
-    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending);
+    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending, String search);
 
     public Student getStudent(int id);
 

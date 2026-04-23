@@ -28,10 +28,13 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending) {
+    public Page<Student> getStudentList(int page, int size, String sortBy, boolean ascending, String search) {
         Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
         Pageable pageable = PageRequest.of(page, size, sort);
-        return studentRepository.findAll(pageable);
+        if(search == null || search.trim().isEmpty()) {
+            return studentRepository.findAll(pageable);
+        }
+        return studentRepository.searchStudent(search, pageable);
     }
 
     @Override
