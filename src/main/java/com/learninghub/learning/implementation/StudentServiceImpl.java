@@ -1,5 +1,7 @@
 package com.learninghub.learning.implementation;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,6 +26,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student createStudent(Student student) {
+        student.setCreatedAt(LocalDateTime.now());
         return studentRepository.save(student);
     }
 

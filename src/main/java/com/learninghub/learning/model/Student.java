@@ -1,5 +1,7 @@
 package com.learninghub.learning.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,11 +24,14 @@ public class Student {
     @Min(value = 1, message = "Age must be greater than 0")
     private int age;
 
+    private LocalDateTime createdAt;
+
     public Student(){}
 
-    public Student(String name, int age) {
+    public Student(String name, int age, LocalDateTime createdAt) {
         this.name = name;
         this.age = age;
+        this.createdAt = createdAt;
     }
 
     public Integer getId() {
@@ -51,6 +56,14 @@ public class Student {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String toString() {
